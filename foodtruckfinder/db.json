@@ -30,36 +30,49 @@ datasource db {
     id
     name
     description
-    hours
-    menus
+    aboutId
+    contactId
+  }
+
+  model Contact {
+    id
+    name
+    information
+  }
+
+  model About {
+    id
+    firstName
+    lastName
+    title
+    description
   }
 
   model Schedule {
     id
-    day
-    startHour
-    endHour
+    dateId
+    locationId
   }
 
-  model Day {
+  model Date {
     id
-    day
-    startHour
-    endHour
+    date
+    hourId
   }
 
   model Hour {
     id
-    day
     startHour
     endHour
   }
 
   model Location {
     id
-    day
-    startHour
-    endHour
+    address1stLine
+    address2ndLine
+    city
+    state
+    zipCode
   }
 
   model Menu {
@@ -67,6 +80,7 @@ datasource db {
     category
     item
     cost
+    isCatering
   }
 
   model MenuItem {

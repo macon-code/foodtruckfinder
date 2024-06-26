@@ -34,14 +34,49 @@ datasource db {
     menus
   }
 
-  model Hours {
+  model Schedule {
     id
     day
     startHour
     endHour
   }
 
-  model Menus {
+  model Day {
+    id
+    day
+    startHour
+    endHour
+  }
+
+  model Hour {
+    id
+    day
+    startHour
+    endHour
+  }
+
+  model Location {
+    id
+    day
+    startHour
+    endHour
+  }
+
+  model Menu {
+    id
+    category
+    item
+    cost
+  }
+
+  model MenuItem {
+    id
+    category
+    item
+    cost
+  }
+
+  model MenuCourse {
     id
     category
     item

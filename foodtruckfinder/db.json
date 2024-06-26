@@ -54,3 +54,5 @@ datasource db {
     USER
     GUEST
   }
+
+  Test

@@ -1,29 +1,95 @@
-# Create T3 App
+# Installation Instructions
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+To Node is required prior to downloading the project.
 
-## What's next? How do I make an app with this?
+## Installing Node.js
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Follow the instructions on the Node.js [website](https://nodejs.org/en/download/current) to install Node.js.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Installing Yarn
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+Open a command console and run the command:
 
-## Learn More
+```
+npm install --global yarn
+```
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Project Directory
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+Create an empty folder where you want to store your app.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## Install Git
 
-## How do I deploy this?
+Follow the instructions on [Git](https://git-scm.com/downloads) to download Git.
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Clone the Repository
+
+Open Git Bash and navigate to the folder you created to store the app. Clone the repository using:
+
+```
+git clone https://github.com/SnubbullTrouble/whowantsthisdog.git
+```
+
+## Install Dependencies
+
+To install the project dependencies, open /whowantsthisdog/ in a command console. Run the command:
+
+```
+yarn
+```
+
+or
+
+```
+yarn install
+```
+
+# Configuring the Project
+
+Some environment variables are required to build the app.
+
+## Environment Variables
+
+NextAuth requires some information before the project can be built. The required fields are:
+
+```
+NEXTAUTH_SECRET=""
+NEXTAUTH_URL="http://localhost:3000"
+
+DISCORD_CLIENT_ID=""
+DISCORD_CLIENT_SECRET=""
+```
+
+Contact Macon Code to inquire about the application information.
+
+# Using the Development Server
+
+The app runs locally on a local server.
+
+## Hot Reload
+
+To devlop with hot reload, use the command:
+
+```
+yarn dev
+```
+
+## Building the Application
+
+The application has to be built/rebuilt to view it. To build, run the command:
+
+```
+yarn build
+```
+
+## Start Development Server
+
+To start the development server, run the command:
+
+```
+yarn start
+```
+
+## Stopping Developement Server
+
+To stop the server, use <kbd>Ctrl</kbd> + <kbd>C</kbd>.

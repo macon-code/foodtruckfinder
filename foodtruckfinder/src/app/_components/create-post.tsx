@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { api } from "~/trpc/react";
+import { api } from "whowantsthisdog/trpc/react";
 import styles from "../index.module.css";
 
 export function CreatePost() {
@@ -35,9 +35,9 @@ export function CreatePost() {
       <button
         type="submit"
         className={styles.submitButton}
-        disabled={createPost.isPending}
+        disabled={createPost.isLoading}
       >
-        {createPost.isPending ? "Submitting..." : "Submit"}
+        {createPost.isLoading ? "Submitting..." : "Submit"}
       </button>
     </form>
   );

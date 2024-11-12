@@ -1,68 +1,90 @@
-import Link from "next/link";
+"use client";
 
-import { CreatePost } from "~/app/_components/create-post";
-import { api } from "~/trpc/server";
-import styles from "./index.module.css";
+import React, { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  InputBase,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  CssBaseline,
+} from "@mui/material";
+import { Menu as MenuIcon } from "@mui/icons-material";
+import UserIconWithMenu from "./components/UserIconWithMenu";
+import { trpc, trpcClient } from "../utils/trpc-utils";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ViewTrucks } from "./components/ViewTrucks";
 
-export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
+const App: React.FC = () => {
+  const [queryClient] = useState(() => new QueryClient());
+  const [tClient] = useState(trpcClient);
 
-  return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <h1 className={styles.title}>
-          Create <span className={styles.pinkSpan}>T3</span> App
-        </h1>
-        <div className={styles.cardRow}>
-          <Link
-            className={styles.card}
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className={styles.cardTitle}>First Steps →</h3>
-            <div className={styles.cardText}>
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className={styles.card}
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className={styles.cardTitle}>Documentation →</h3>
-            <div className={styles.cardText}>
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
-        </div>
-        <div className={styles.showcaseContainer}>
-          <p className={styles.showcaseText}>
-            {hello ? hello.greeting : "Loading tRPC query..."}
-          </p>
-        </div>
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
-        <CrudShowcase />
-      </div>
-    </main>
-  );
-}
+  const toggleNav = () => {
+    setIsNavVisible(!isNavVisible);
+  };
 
-async function CrudShowcase() {
-  const latestPost = await api.post.getLatest();
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
 
   return (
-    <div className={styles.showcaseContainer}>
-      {latestPost ? (
-        <p className={styles.showcaseText}>
-          Your most recent post: {latestPost.name}
-        </p>
-      ) : (
-        <p className={styles.showcaseText}>You have no posts yet.</p>
-      )}
+    <trpc.Provider client={tClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <div>
+          <CssBaseline />
+          <AppBar position="fixed">
+            <Toolbar>
+              <IconButton edge="start" color="inherit" onClick={toggleNav}>
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" style={{ flexGrow: 1 }}>
+                Macon Food Truck Finder
+              </Typography>
+              <InputBase
+                placeholder="Search…"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                inputProps={{ "aria-label": "search" }}
+                style={{
+                  color: "white",
+                  background: "rgba(255, 255, 255, 0.15)",
+                  borderRadius: "4px",
+                  padding: "0.5rem",
+                }}
+              />
+              <UserIconWithMenu />
+            </Toolbar>
+          </AppBar>
 
-      <CreatePost />
-    </div>
+          <Drawer anchor="left" open={isNavVisible} onClose={toggleNav}>
+            <List>
+              <ListItem button>
+                <ListItemText primary="Home" />
+              </ListItem>
+              <ListItem button>
+                <ListItemText primary="About" />
+              </ListItem>
+              <ListItem button>
+                <ListItemText primary="Services" />
+              </ListItem>
+              <ListItem button>
+                <ListItemText primary="Contact" />
+              </ListItem>
+            </List>
+          </Drawer>
+
+          <ViewTrucks />
+        </div>
+      </QueryClientProvider>
+    </trpc.Provider>
   );
-}
+};
+
+export default App;

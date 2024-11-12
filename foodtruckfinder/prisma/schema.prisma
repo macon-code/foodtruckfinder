@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Define the FoodTruck model
+model FoodTruck {
+  id         Int                @id @default(autoincrement())
+  name       String
+  homeCity   String
+  tags       String             //TODO: Make this multi-field
+  rating     Float
+  category   String
+  thumbnail  String
+  description String
+  spots      Spot[]             @relation("FoodTruckSpots")
+}
+
+// Define the Location model
+model Location {
+  id        Int     @id @default(autoincrement())
+  latitude  Float
+  longitude Float
+  spots     Spot[]  @relation("LocationSpots")
+}
+
+// Define the Spot model
+model Spot {
+  id          Int        @id @default(autoincrement())
+  date        DateTime   // Use DateTime for date
+  description String  
+  locationId  Int
+  foodTruckId Int
+  location    Location   @relation("LocationSpots", fields: [locationId], references: [id])
+  foodTruck   FoodTruck  @relation("FoodTruckSpots", fields: [foodTruckId], references: [id])
+}
+

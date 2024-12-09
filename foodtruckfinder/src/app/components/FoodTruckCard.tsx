@@ -1,5 +1,5 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { Spot } from "./TruckList";
+import { Spot } from "~/utils/truckList-utils";
 
 interface FoodTruckCardProps {
   spot: Spot;

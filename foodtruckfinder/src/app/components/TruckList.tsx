@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Typography,
   Grid,
@@ -8,10 +8,13 @@ import {
   InputLabel,
   FormControl,
   Box,
+  Button,
 } from "@mui/material";
 import FoodTruckCard from "./FoodTruckCard";
 import { MapBounds } from "./MapComponent";
 import { FoodTruck, Spot } from "~/utils/truckList-utils";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface Props {
   spots: Spot[];
@@ -62,9 +65,32 @@ export function FoodTruckList({ spots, mapBounds }: Props) {
 
   return (
     <div style={{ padding: "20px" }}>
-      <Typography variant="h4" gutterBottom>
-        Food Truck List
-      </Typography>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "20px",
+        }}
+      >
+        <Typography variant="h4" gutterBottom>
+          Food Truck List
+        </Typography>
+        <Link href="/create-food-truck" passHref>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{
+              marginLeft: "16px", // Optional, just to add some space between the text and the button
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            +
+          </Button>
+        </Link>
+      </div>
       <div
         style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}
       >

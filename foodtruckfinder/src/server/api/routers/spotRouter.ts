@@ -195,4 +195,62 @@ export const spotRouter = createTRPCRouter({
 
       return spot;
     }),
+
+  createSpotWithTruck: publicProcedure
+    .input(
+      z.object({
+        foodTruckName: z.string(),
+        homeCity: z.string(),
+        tags: z.string(),
+        category: z.string(),
+        description: z.string(),
+        selectedDate: z.string(),
+        selectedCoordinates: z.object({
+          lat: z.number(),
+          lng: z.number(),
+        }),
+        selectedIcon: z.string().optional(),
+        notes: z.string(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const {
+        foodTruckName,
+        homeCity,
+        tags,
+        category,
+        description,
+        selectedDate,
+        selectedCoordinates,
+        selectedIcon,
+        notes,
+      } = input;
+
+      // Create a new spot along with related food truck and location
+      const spot = await prisma.spot.create({
+        data: {
+          date: new Date(selectedDate),
+          description: notes,
+          location: {
+            create: {
+              latitude: selectedCoordinates.lat,
+              longitude: selectedCoordinates.lng,
+            },
+          },
+          foodTruck: {
+            create: {
+              name: foodTruckName,
+              homeCity: homeCity,
+              tags: tags,
+              rating: 0, // Set an initial rating, adjust as necessary
+              category: category,
+              thumbnail: selectedIcon ?? "", // Use empty string if no thumbnail is provided
+              description: description,
+            },
+          },
+        },
+      });
+
+      return spot; // Return the created spot
+    }),
 });

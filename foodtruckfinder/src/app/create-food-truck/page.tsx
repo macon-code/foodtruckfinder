@@ -6,6 +6,7 @@ import "leaflet/dist/leaflet.css";
 import SelectLocationButton from "./SelectLocationButton";
 import Link from "next/link";
 import { trpc } from "~/utils/trpc-utils";
+import AppBarHeader from "../components/AppBarHeader";
 
 const CreateFoodTruckSpot: React.FC = () => {
   // State for form inputs
@@ -73,161 +74,177 @@ const CreateFoodTruckSpot: React.FC = () => {
   };
 
   return (
-    <Box sx={{ padding: "30px", maxWidth: "900px", margin: "auto" }}>
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>
-        Create a New Food Truck Spot
-      </Typography>
+    <>
+      <AppBarHeader />
+      <Box
+        sx={{
+          padding: "30px",
+          maxWidth: "900px",
+          margin: "auto",
+          marginTop: "64px", // Added margin-top to avoid content being hidden behind AppBar
+        }}
+      >
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>
+          Create a New Food Truck Spot
+        </Typography>
 
-      <Paper sx={{ padding: "20px", borderRadius: 2, boxShadow: 3 }}>
-        <Grid container spacing={3}>
-          {/* Food Truck Name */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Food Truck Name"
-              variant="outlined"
-              fullWidth
-              value={foodTruckName}
-              onChange={(e) => setFoodTruckName(e.target.value)}
-              required
-            />
+        <Paper sx={{ padding: "20px", borderRadius: 2, boxShadow: 3 }}>
+          <Grid container spacing={3}>
+            {/* Food Truck Name */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Food Truck Name"
+                variant="outlined"
+                fullWidth
+                value={foodTruckName}
+                onChange={(e) => setFoodTruckName(e.target.value)}
+                required
+              />
+            </Grid>
+
+            {/* Home City */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Home City"
+                variant="outlined"
+                fullWidth
+                value={homeCity}
+                onChange={(e) => setHomeCity(e.target.value)}
+                required
+              />
+            </Grid>
+
+            {/* Tags */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Tags (e.g., tacos, burritos)"
+                variant="outlined"
+                fullWidth
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
+              />
+            </Grid>
+
+            {/* Category */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Category"
+                variant="outlined"
+                fullWidth
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              />
+            </Grid>
+
+            {/* Description */}
+            <Grid item xs={12}>
+              <TextField
+                label="Description"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={4}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </Grid>
+
+            {/* Date */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Date"
+                type="date"
+                variant="outlined"
+                fullWidth
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+                InputLabelProps={{ shrink: true }}
+                required
+              />
+            </Grid>
+
+            {/* Icon URL */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Icon URL"
+                variant="outlined"
+                fullWidth
+                value={selectedIcon}
+                onChange={(e) => setSelectedIcon(e.target.value)}
+              />
+            </Grid>
+
+            {/* Location Selection */}
+            <Grid item xs={12}>
+              <SelectLocationButton
+                onSelectLocation={handleLocationSelection}
+              />
+            </Grid>
+
+            {/* Location Notes */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Location Notes"
+                variant="outlined"
+                fullWidth
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+              />
+            </Grid>
+
+            {/* Displaying Selected Coordinates */}
+            <Grid item xs={12}>
+              {selectedCoordinates ? (
+                <Typography variant="body1" color="textSecondary">
+                  Selected Coordinates: {selectedCoordinates.lat},{" "}
+                  {selectedCoordinates.lng}
+                </Typography>
+              ) : (
+                <Typography variant="body1" color="textSecondary">
+                  No location selected yet.
+                </Typography>
+              )}
+            </Grid>
           </Grid>
 
-          {/* Home City */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Home City"
-              variant="outlined"
-              fullWidth
-              value={homeCity}
-              onChange={(e) => setHomeCity(e.target.value)}
-              required
-            />
-          </Grid>
-
-          {/* Tags */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Tags (e.g., tacos, burritos)"
-              variant="outlined"
-              fullWidth
-              value={tags}
-              onChange={(e) => setTags(e.target.value)}
-            />
-          </Grid>
-
-          {/* Category */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Category"
-              variant="outlined"
-              fullWidth
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
-            />
-          </Grid>
-
-          {/* Description */}
-          <Grid item xs={12}>
-            <TextField
-              label="Description"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={4}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </Grid>
-
-          {/* Date */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Date"
-              type="date"
-              variant="outlined"
-              fullWidth
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              InputLabelProps={{ shrink: true }}
-              required
-            />
-          </Grid>
-
-          {/* Icon URL */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Icon URL"
-              variant="outlined"
-              fullWidth
-              value={selectedIcon}
-              onChange={(e) => setSelectedIcon(e.target.value)}
-            />
-          </Grid>
-
-          {/* Location Selection */}
-          <Grid item xs={12}>
-            <SelectLocationButton onSelectLocation={handleLocationSelection} />
-          </Grid>
-
-          {/* Location Notes */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Location Notes"
-              variant="outlined"
-              fullWidth
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-            />
-          </Grid>
-
-          {/* Displaying Selected Coordinates */}
-          <Grid item xs={12}>
-            {selectedCoordinates ? (
-              <Typography variant="body1" color="textSecondary">
-                Selected Coordinates: {selectedCoordinates.lat},{" "}
-                {selectedCoordinates.lng}
-              </Typography>
-            ) : (
-              <Typography variant="body1" color="textSecondary">
-                No location selected yet.
-              </Typography>
-            )}
-          </Grid>
-        </Grid>
-
-        {/* Action Buttons */}
-        <Box
-          sx={{
-            marginTop: "30px",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit}
-            disabled={
-              !selectedCoordinates ||
-              !foodTruckName ||
-              !category ||
-              !description ||
-              !selectedDate
-            }
-            sx={{ width: "48%" }}
+          {/* Action Buttons */}
+          <Box
+            sx={{
+              marginTop: "30px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
           >
-            Submit Spot
-          </Button>
-          <Link href="/" passHref>
-            <Button variant="outlined" color="secondary" sx={{ width: "48%" }}>
-              Cancel
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSubmit}
+              disabled={
+                !selectedCoordinates ||
+                !foodTruckName ||
+                !category ||
+                !description ||
+                !selectedDate
+              }
+              sx={{ width: "48%" }}
+            >
+              Submit Spot
             </Button>
-          </Link>
-        </Box>
-      </Paper>
-    </Box>
+            <Link href="/" passHref>
+              <Button
+                variant="outlined"
+                color="secondary"
+                sx={{ width: "48%" }}
+              >
+                Cancel
+              </Button>
+            </Link>
+          </Box>
+        </Paper>
+      </Box>
+    </>
   );
 };
 

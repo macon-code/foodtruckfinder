@@ -44,6 +44,7 @@ const MainPage: React.FC = () => {
         handleSearchChange={handleSearchChange}
         handleSearchSubmit={handleSearchSubmit}
       />
+      <div>This is a new color</div>
 
       <ViewTrucks searchQuery={searchQuery} />
     </div>

@@ -18,7 +18,7 @@ const UserIconWithMenu: React.FC = () => {
   };
 
   // Import the PNG image
-  const defaultUserIcon = "./default-user-icon.png"; // No need to change this line
+  const defaultUserIcon = "assets/default-user-icon.png"; // No need to change this line
 
   return (
     <div>

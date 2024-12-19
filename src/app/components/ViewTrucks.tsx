@@ -1,8 +1,10 @@
+import dynamic from "next/dynamic";
 import { trpc } from "~/utils/trpc-utils";
-import MapComponent from "./MapComponent";
 import FoodTruckList from "./TruckList";
 import { useState, useEffect } from "react";
 import { Spot } from "~/utils/truckList-utils";
+
+const DynamicMapComponent = dynamic(() => import("./MapComponent"), { ssr: false });
 
 interface ViewTrucksProps {
   searchQuery: string;
@@ -19,22 +21,21 @@ export const ViewTrucks: React.FC<ViewTrucksProps> = ({ searchQuery }) => {
     maximumBound: { latitude: -90, longitude: -180 },
   });
 
-  // Use effect to filter spots whenever the searchQuery changes
+  // Filter spots based on the search query
   useEffect(() => {
     if (searchQuery) {
       const lowercasedQuery = searchQuery.toLowerCase();
       const filtered = spots.filter((spot) => {
-        // Split the tags string into an array and check if any tag matches the search term
-        const tagsArray = spot.foodTruck.tags.split(","); // Assuming tags are stored as a comma-separated string
-        const matchesSearchTerm =
+        const tagsArray = spot.foodTruck.tags.split(",");
+        return (
           spot.foodTruck.name.toLowerCase().includes(lowercasedQuery) ||
           spot.foodTruck.category.toLowerCase().includes(lowercasedQuery) ||
-          tagsArray.some((tag) => tag.toLowerCase().includes(lowercasedQuery));
-        return matchesSearchTerm;
+          tagsArray.some((tag) => tag.toLowerCase().includes(lowercasedQuery))
+        );
       });
       setFilteredSpots(filtered);
     } else {
-      setFilteredSpots(spots); // If no search term, show all spots
+      setFilteredSpots(spots);
     }
   }, [searchQuery, spots]);
 
@@ -55,7 +56,7 @@ export const ViewTrucks: React.FC<ViewTrucksProps> = ({ searchQuery }) => {
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ flex: "1" }}>
           <h1>Interactive Map</h1>
-          <MapComponent spots={filteredSpots} setMapBounds={setMapBounds} />
+          <DynamicMapComponent spots={filteredSpots} setMapBounds={setMapBounds} />
         </div>
         <div style={{ flex: "1", marginLeft: "16px" }}>
           <FoodTruckList spots={filteredSpots} mapBounds={mapBounds} />

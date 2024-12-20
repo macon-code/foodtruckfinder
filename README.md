@@ -56,7 +56,7 @@ Some environment variables are required to build the app. Create a file called .
 NextAuth requires some information before the project can be built. The required fields are:
 
 ```
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="file:prisma/dev.db"
 ```
 
 Contact Macon Code to inquire about the application information.

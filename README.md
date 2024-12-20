@@ -35,7 +35,7 @@ git clone https://github.com/macon-code/foodtruckfinder.git
 
 ## Install Dependencies
 
-To install the project dependencies, open /foodtruckfinder/ in a command console. Run the command:
+To install the project dependencies, open or navigate to `~/foodtruckfinder/` in a command console. Run the command:
 
 ```
 yarn
@@ -63,10 +63,10 @@ Contact Macon Code to inquire about the application information.
 
 ## Generate the Prisma db file
 
-To create or upate the db and Zod resources, use the command:
+Since yarn is the package manager, we will need to run the command as a yarn command, then as a prisma command. To create or upate the db and Zod resources, use the command:
 
 ```
-prisma generate
+yarn prisma generate
 ```
 
 ## Seeding the Database

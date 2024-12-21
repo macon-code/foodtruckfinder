@@ -8,8 +8,8 @@ import {
   Typography,
   Drawer,
   List,
-  ListItem,
   ListItemText,
+  ListItemButton,
 } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import UserIconWithMenu from "./UserIconWithMenu"; // Assuming this is another custom component for the user icon.
@@ -69,27 +69,27 @@ const AppBarHeader: React.FC<AppBarHeaderProps> = ({
       <Drawer anchor="left" open={isNavVisible} onClose={toggleNav}>
         <List>
           <Link href="/">
-            <ListItem button>
+            <ListItemButton>
               <ListItemText primary="Home" />
-            </ListItem>
+            </ListItemButton>
           </Link>
           <Link href="/about">
-            <ListItem button>
+            <ListItemButton>
               <ListItemText primary="About" />
-            </ListItem>
+            </ListItemButton>
           </Link>
-          <ListItem button>
+          <ListItemButton>
             <ListItemText primary="Services" />
-          </ListItem>
+          </ListItemButton>
           <Link href="/contact">
-            <ListItem button>
+            <ListItemButton>
               <ListItemText primary="Contact" />
-            </ListItem>
+            </ListItemButton>
           </Link>
           <Link href="/create-food-truck" passHref>
-            <ListItem button>
+            <ListItemButton>
               <ListItemText primary="Create Spot" />
-            </ListItem>
+            </ListItemButton>
           </Link>
         </List>
       </Drawer>

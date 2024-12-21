@@ -1,5 +1,6 @@
 import { spotRouter } from "~/server/api/routers/spotRouter";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
+import { sendEmailRouter } from "./routers/sendEmailRouter";
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   spot: spotRouter,
+  email: sendEmailRouter,
 });
 
 // export type definition of API

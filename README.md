@@ -69,6 +69,14 @@ Since yarn is the package manager, we will need to run the command as a yarn com
 yarn prisma generate
 ```
 
+## Apply changes to the database
+
+Once the models are generated, the tables must be created in the database itself.
+
+```
+yarn prisma db push
+```
+
 ## Seeding the Database
 
 To fill the db with test data, use the command:

@@ -81,9 +81,11 @@ const AppBarHeader: React.FC<AppBarHeaderProps> = ({
           <ListItem button>
             <ListItemText primary="Services" />
           </ListItem>
-          <ListItem button>
-            <ListItemText primary="Contact" />
-          </ListItem>
+          <Link href="/contact">
+            <ListItem button>
+              <ListItemText primary="Contact" />
+            </ListItem>
+          </Link>
           <Link href="/create-food-truck" passHref>
             <ListItem button>
               <ListItemText primary="Create Spot" />

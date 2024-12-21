@@ -13,7 +13,6 @@ import {
 import FoodTruckCard from "./FoodTruckCard";
 import { MapBounds } from "./MapComponent";
 import { FoodTruck, Spot } from "~/utils/truckList-utils";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 interface Props {

@@ -102,6 +102,16 @@ const generateTestSpots = () => {
     "A refreshing smoothie truck for all tastes.",
   ];
 
+  const sampleIcons: string[] = [
+    "https://cdn-icons-png.flaticon.com/512/683/683071.png",
+    "https://static.vecteezy.com/system/resources/previews/013/219/837/non_2x/food-truck-icon-on-white-background-street-food-wagon-sign-foodtruck-logo-symbol-flat-style-vector.jpg",
+    "https://cdn-icons-png.flaticon.com/512/1046/1046762.png",
+    "https://e7.pngegg.com/pngimages/502/287/png-clipart-computer-icons-food-truck-car-food-truck-food-orange-thumbnail.png",
+    "https://media.istockphoto.com/id/472291069/vector/food-truck-text.jpg?s=612x612&w=0&k=20&c=UBGUvvKLssus6jcbUdiDWRHZJc28JUXHObTwmU7jFoM=",
+    "https://www.pngkey.com/png/detail/514-5146171_food-truck-icon-foodtruck-png.png",
+    "https://media.lordicon.com/icons/wired/outline/1927-food-truck.svg",
+  ];
+
   const maconGaLocations: string[] = [
     "Downtown Macon",
     "Ocmulgee Mounds National Historical Park",
@@ -176,7 +186,8 @@ const generateTestSpots = () => {
         tags: ["popular", "local", "foodie", "street food"], // Tags are non-null
         rating: parseFloat((Math.random() * 10).toFixed(1)), // Random rating between 0 and 10
         category: categories[index % categories.length] ?? "truck",
-        thumbnail: `https://example.com/thumbnails/foodtruck${index + 1}.jpg`, // Sample thumbnail URL
+        thumbnail:
+          sampleIcons[Math.floor(Math.random() * sampleIcons.length)] ?? "",
         description: descriptions[index % descriptions.length] ?? "description",
       },
     };
